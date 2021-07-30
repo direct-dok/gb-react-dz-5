@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
-import countReducer from './countReducer'
-import userReducer from './userReducer'
+import { chatsReducer } from './chatsReducer'
+import { profileReducer } from './profileReducer'
 
 const rootReducer = combineReducers({
-    count: countReducer, 
-    users: userReducer
+    chats: chatsReducer, 
+    profile: profileReducer
 })
 
 export default rootReducer

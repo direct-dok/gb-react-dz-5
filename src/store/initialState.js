@@ -1,8 +1,4 @@
 const defaultState = {
-    count: 0, 
-    users: [
-
-    ], 
     chats: [
         {id: 1, status: 'Death threats, suspicious roadblocks, missing witnesses and moved bodies revealed in leaked documents obtained exclusively by CNN', name: 'Alex', avatar: '/img/avatar/1.jpg', message: 'Even though Israel is a small country it is always in the news.'},
         {id: 2, status: 'Drinking a little each week protects your heart if you have a cardiovascular condition, study finds', name: 'Noah', avatar: '/img/avatar/2.jpg', message: 'The news continues to report on Jews moving to Israel, on the technology invented there, but also on conflict, wars and tensions with surrounding people.'},
@@ -25,7 +21,7 @@ const defaultState = {
         {id: 19, status: 'In the UK, where a standard unit of alcohol is 10 milliliters or 8 grams, it\'s a bit more complicated', name: 'Jacob', avatar: '/img/avatar/19.jpg', message: 'Surprisingly Abraham really did nothing important in his life.'},
         {id: 20, status: 'For decades, a "drink a day" was considered fine by public health standards because many similar studies over the years found a positive', name: 'Charley', avatar: '/img/avatar/20.jpg', message: 'Surprisingly Abraham really did nothing important in his life.'}
       ], 
-      profile: {}
+      profile: []
 }
 
 export default defaultState

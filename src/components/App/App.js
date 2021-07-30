@@ -6,7 +6,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, connect } from 'react-redux';
 
 // Components
 import Home from '../Home'
@@ -52,55 +52,57 @@ const useStyles = makeStyles({
   
 });
 
-const App = (props) => {
+const App = ({allChats, profile}) => {
 
   const classes = useStyles()
 
   // REDUX
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
-  const count = useSelector(state => state.count.count)
-  const usersRedux = useSelector(state => state.users.users)
+  // const count = store.count
+  // const usersRedux = store.users
 
-  console.log('count - ', count)
+  // console.log('count - ', count)
 
-  const countIncrement = (count) => {
-    dispatch({type: "INCREMENT", payload: count})
-  }
+  // const countIncrement = (count) => {
+  //   dispatch({type: "INCREMENT", payload: count})
+  // }
 
-  const countDecrement = (count) => {
-    dispatch({type: "DECREMENT", payload: count})
-  }
+  // const countDecrement = (count) => {
+  //   dispatch({type: "DECREMENT", payload: count})
+  // }
 
-  const addUser = (userName) => {
-    const user = {
-      name: userName, 
-      id: Date.now()
-    }
-    dispatch(addUserAction(user))
-  }
+  // const addUser = (userName) => {
+  //   const user = {
+  //     name: userName, 
+  //     id: Date.now()
+  //   }
+  //   dispatch(addUserAction(user))
+  // }
 
-  const removeUser = (userId) => {
-    dispatch(removeUserAction(userId))
-  }
+  // const removeUser = (userId) => {
+  //   dispatch(removeUserAction(userId))
+  // }
   // END REDUX
 
-  const [chats, setChats] = useState(props.chats)
+  // console.log(store)
 
-  const addChat = (name, status, message) => {
-    console.log('addChat Function', name, status, message)
+  // const [chats, setChats] = useState(store.chats)
 
-    const obj = {
-      id: chats.length + 1, 
-      status: status, 
-      name: name, 
-      avatar: '', 
-      message: message
-    }
+  // const addChat = (name, status, message) => {
+  //   console.log('addChat Function', name, status, message)
 
-    setChats(oldArr => [ ...oldArr, obj ])
+  //   const obj = {
+  //     id: chats.length + 1, 
+  //     status: status, 
+  //     name: name, 
+  //     avatar: '', 
+  //     message: message
+  //   }
 
-  }
+  //   setChats(oldArr => [ ...oldArr, obj ])
+
+  // }
 
   return (
     <Router>
@@ -125,30 +127,30 @@ const App = (props) => {
 
       <main className={classes.main}>
       {/* // REDUX */}
-        <div>{count}</div>
+        {/* <div>{count}</div>
       <button onClick={() => countIncrement(10)}>INCR</button>
       <button onClick={() => countDecrement(5)}>DECR</button>
       <br />
       <br />
 
-      <button onClick={() => addUser(prompt()) }>add user</button>
+      <button onClick={() => addUser(prompt()) }>add user</button> */}
       {/* <button onClick={() => countDecrement(5)}>DECR</button> */}
 
-      { usersRedux.length ? 
+      {/* { usersRedux.length ? 
         <div>{usersRedux.map(user => <div key={user.id} onClick={() => removeUser(user.id)}>{user.name} - {user.id}</div>)}</div>
         :
         <div>Пользователей нет</div>
-      }
+      } */}
       {/* // END REDUX */}
       <Switch>
           <Route exact path="/">
-            <Home chats={chats} addChat={addChat} />
+            <Home chats={allChats} />
           </Route>
           <Route path="/profile">
             <Profile />
           </Route>
           <Route path="/chats/:id">
-            <Chat chats={chats} />
+            <Chat chats={allChats} />
           </Route>
           <Route path="/error-404">
             <Error />
@@ -164,4 +166,11 @@ const App = (props) => {
   );
 }
 
-export default App;
+const mapStateToProps = (store) => {
+  return {
+    allChats: store.chats, 
+    profile:  store.profile
+  }
+}
+
+export default connect(mapStateToProps, null)(App);
