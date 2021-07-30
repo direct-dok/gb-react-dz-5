@@ -25,8 +25,8 @@ import AddChat from '../AddChat';
 
 // Action creator
 
-import { addUserAction  } from '../../store/actionCreators/add_user_action'
-import { removeUserAction } from '../../store/actionCreators/remove_user_action'
+// import { addUserAction  } from '../../store/actionCreators/add_user_action'
+// import { removeUserAction } from '../../store/actionCreators/remove_user_action'
 
 const useStyles = makeStyles({
   bar: {
@@ -52,6 +52,7 @@ const useStyles = makeStyles({
   
 });
 
+// const App = ({allChats, profile}) => {
 const App = ({allChats, profile}) => {
 
   const classes = useStyles()
@@ -144,13 +145,15 @@ const App = ({allChats, profile}) => {
       {/* // END REDUX */}
       <Switch>
           <Route exact path="/">
-            <Home chats={allChats} />
+            {/* <Home chats={allChats} /> */}
+            <Home />
           </Route>
           <Route path="/profile">
             <Profile />
           </Route>
           <Route path="/chats/:id">
-            <Chat chats={allChats} />
+            {/* <Chat chats={allChats} /> */}
+            <Chat />
           </Route>
           <Route path="/error-404">
             <Error />
@@ -166,11 +169,13 @@ const App = ({allChats, profile}) => {
   );
 }
 
-const mapStateToProps = (store) => {
-  return {
-    allChats: store.chats, 
-    profile:  store.profile
-  }
-}
+// const mapStateToProps = (store) => {
+//   return {
+//     allChats: store.chats, 
+//     profile:  store.profile
+//   }
+// }
 
-export default connect(mapStateToProps, null)(App);
+export default App;
+
+// export default connect(mapStateToProps, null)(App);

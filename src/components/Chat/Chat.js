@@ -3,6 +3,7 @@ import {
   useParams, 
   Redirect
 } from "react-router-dom";
+import { connect } from 'react-redux';
 
 
 // Material UI
@@ -21,6 +22,8 @@ import Grid from '@material-ui/core/Grid';
 // My Components
 import Message from '../Message'
 import ChatList from '../ChatList';
+
+
 
 const useStyles = makeStyles({
   field: { 
@@ -64,7 +67,7 @@ const useStyles = makeStyles({
   }
 })
 
-const Chat = (props) => {
+const Chat = ({chats}) => {
   
   let { id } = useParams()
   const classes = useStyles()
@@ -75,10 +78,12 @@ const Chat = (props) => {
   const [messageFied, setMessageField] = useState('')
   const [authorField, setAuthorField] = useState('')
 
+  console.log('Chat')
+
   const inputRef = useRef()
 
   useEffect(() => {
-    const currnetUser = props.chats.filter(elem => elem.id == id);
+    const currnetUser = chats.filter(elem => elem.id == id);
     setUser(currnetUser[0])
     setMessageList([])
   }, [id])
@@ -132,7 +137,7 @@ const Chat = (props) => {
       <Container maxWidth="md">
         <Grid container >
         <Grid item xs={5}>
-          <ChatList chats={props.chats} />
+          <ChatList chats={chats} />
         </Grid>
 
         <Grid item xs={7}>
@@ -204,4 +209,10 @@ const Chat = (props) => {
   );
 }
 
-export default Chat;
+const mapStateToProps = (store) => {
+  return {
+    chats: store.chats.chats
+  }
+}
+
+export default connect(mapStateToProps, null)(Chat);

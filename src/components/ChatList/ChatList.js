@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Link
 } from "react-router-dom";
+import { connect } from 'react-redux';
 
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,6 +11,13 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+
+// Action Creator
+import removeUserAction from '../../store/actionCreators/remove_chats_action'
 
 const useStyles = makeStyles({
   list: {
@@ -36,17 +44,25 @@ const useStyles = makeStyles({
     height: '33px', 
     borderRadius: '10px',
     background: '#490b52',
+  }, 
+  deleteButton: {
+    margin: '0 0 0 10px'
   }
 })
 
 
-function ChatList(props) {
+function ChatList({chats, removeChat}) {
+
 
   const classes = useStyles()
 
+  const deleteOneChat = (id) => {
+    removeChat(id)
+  }
+
   return (
     <List className={classes.list}>
-    { props.chats.map(({id, name, avatar, message}) => (
+    { chats.map(({id, name, avatar, message}) => (
       <React.Fragment key={id}>
         <ListItem className={classes.listItem} button>
         <ListItemAvatar>
@@ -56,6 +72,11 @@ function ChatList(props) {
           <Link to={`/chats/${id}`} className={classes.link}>
             Go to chat
           </Link>
+          {/* <Button size="small" className={classes.deleteButton}> */}
+            <IconButton aria-label="delete" className={classes.deleteButton} onClick={() => deleteOneChat(id)}>
+              <DeleteIcon fontSize="small" />
+            </IconButton>
+          {/* </Button> */}
         </ListItem>
       </React.Fragment>
     )) }
@@ -64,4 +85,16 @@ function ChatList(props) {
 
 }
 
-export default ChatList;
+const mapStateToProps = (store) => {
+  return {
+    chats: store.chats.chats
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    removeChat: (payload) => dispatch(removeUserAction(payload))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChatList);

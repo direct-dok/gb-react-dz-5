@@ -67,6 +67,10 @@ const AddChat = (props) => {
   const addChat = (e) => {
     e.preventDefault()
     props.addChat(name, status, message)
+    setName('')
+    setStatus('')
+    setMessage('')
+    handleClose()
   }
 
   const handleOpen = () => {

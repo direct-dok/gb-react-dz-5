@@ -1,17 +1,48 @@
-
+import React from 'react';
+import { connect } from 'react-redux';
 
 // Material UI
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+import Checkbox from '@material-ui/core/Checkbox';
 
-const Profile = () => {
+// Action Creator 
+import toggleOnlineAction from '../../store/actionCreators/toggle_online_action'
+
+const Profile = ({profile, toggleAction}) => {
+
+  const toggleCheckbox = () => {
+    let copyObj = Object.assign({}, profile);
+    copyObj.online = !profile.online
+    toggleAction(copyObj)
+  }
 
   return (
     <Container maxWidth="sm">
       <Typography component="h1" variant="h3">Hello i'am Profile</Typography>
-      <Typography variant="body1">Other studies also found a connection between moderate drinking and a reduced risk of Type 2 diabetes, a growing epidemic globally.</Typography>
+      <Typography variant="body1">{profile.name}</Typography>
+      <Typography variant="body1">{profile.age}</Typography>
+      <Typography variant="body1">{profile.online ? 'Online' : 'Offline'}</Typography>
+      <Checkbox
+        onClick={() => toggleCheckbox()}
+        checked={profile.online}
+        color="primary"
+        inputProps={{ 'aria-label': 'secondary checkbox' }}
+      />
     </Container>
   );
 }
 
-export default Profile;
+const mapStateToProps = (store) => {
+  return {
+    profile: store.profile.profile
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleAction: (payload) => dispatch(toggleOnlineAction(payload))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

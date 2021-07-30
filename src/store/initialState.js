@@ -21,7 +21,8 @@ const defaultState = {
         {id: 19, status: 'In the UK, where a standard unit of alcohol is 10 milliliters or 8 grams, it\'s a bit more complicated', name: 'Jacob', avatar: '/img/avatar/19.jpg', message: 'Surprisingly Abraham really did nothing important in his life.'},
         {id: 20, status: 'For decades, a "drink a day" was considered fine by public health standards because many similar studies over the years found a positive', name: 'Charley', avatar: '/img/avatar/20.jpg', message: 'Surprisingly Abraham really did nothing important in his life.'}
       ], 
-      profile: []
+      profile: {name: 'John', age: 23, online: true}
+
 }
 
 export default defaultState
