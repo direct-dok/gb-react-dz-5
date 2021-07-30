@@ -42,9 +42,8 @@ const Home = ({chats, addChat}) => {
 
 
   const addChats = (name, status, message) => {
-    console.log('addChat', name, status, message)
     const obj = {
-      id: chats.length + 2, 
+      id: chats[chats.length - 1].id + 1, 
       status: status, 
       name: name, 
       avatar: '', 
