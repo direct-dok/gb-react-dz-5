@@ -88,7 +88,7 @@ const chats = [
 
 ReactDOM.render(
       <Provider store={store}>
-        <App chats={chats} />
+        <App />
         {/* <App /> */}
       </Provider>
       , 
